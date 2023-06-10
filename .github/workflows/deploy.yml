@@ -2,8 +2,8 @@ name: fuelingphp-laravel-cd
 
 env:
   "S3_BUCKET_NAME": "fualingphp-laravel-bucket"
-  "EBS_APPLICATION_NAME": "fualingphp-laravel-prod"
-  "EBS_ENVIRONMENT_NAME": "Fualingphplaravelprod-env"
+  "EBS_APPLICATION_NAME": "laravel-prod"
+  "EBS_ENVIRONMENT_NAME": "laravelprod-env"
   "AWS_REGION": "ap-southeast-1"
   "DEPLOY_PACKAGE_NAME": "laravel-app-${{github.sha}}.zip"
   
