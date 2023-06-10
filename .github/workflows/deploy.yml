@@ -2,10 +2,10 @@ name: fuelingphp-laravel-cd
 
 env:
   "S3_BUCKET_NAME": "fualingphp-laravel-bucket"
-  "EBS_APPLICATION_NAME": "myapplication"
-  "EBS_ENVIRONMENT_NAME": "myapplication-env"
-  "AWS_REGION": "ap-southeast-1"
-  "DEPLOY_PACKAGE_NAME": "myapplication-${{github.sha}}.zip"
+  "EBS_APPLICATION_NAME": "fuelingphp-laravel-prod"
+  "EBS_ENVIRONMENT_NAME": "Fuelingphplaravelprod-env"
+  "AWS_REGION": "us-east-1"
+  "DEPLOY_PACKAGE_NAME": "laravel-app-${{github.sha}}.zip"
   
 on:
   push:
@@ -19,8 +19,8 @@ jobs:
       - name: Clone the repository
         uses: actions/checkout@v3
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+      - name: Zip the repository
+        run: zip -r ${{env.DEPLOY_PACKAGE_NAME}} ./ -x *.git*
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -40,7 +40,6 @@ jobs:
           --source-bundle S3Bucket="${{env.S3_BUCKET_NAME}}",S3Key="${{env.DEPLOY_PACKAGE_NAME}}" \
           --version-label "ver-${{ github.sha }}" \
           --description "commit-sha-${{ github.sha }}"
-          --aws-region: ${{env.AWS_REGION}}
         
       - name: Deploy new ElasticBeanstalk Application Version
         run: aws elasticbeanstalk update-environment --environment-name ${{env.EBS_ENVIRONMENT_NAME}} --version-label "ver-${{ github.sha }}"
