@@ -5,7 +5,7 @@ env:
   "EBS_APPLICATION_NAME": "laravel-prod"
   "EBS_ENVIRONMENT_NAME": "laravelprod-env"
   "AWS_REGION": "ap-southeast-1"
-  "DEPLOY_PACKAGE_NAME": "laravel-app-${{github.sha}}.zip"
+  "DEPLOY_PACKAGE_NAME": "laravel-prod-${{github.sha}}.zip"
   
 on:
   push:
